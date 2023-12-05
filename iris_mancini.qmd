@@ -1,27 +1,27 @@
 ---
-title: "battletech"
+title: "battletech Lab - 5/12/23"
 format: html
 editor: visual
 author: "Iris Mancini"
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
+```{r, echo= FALSE, message = FALSE}
+here::i_am("battletech.Rproj")
+library(here)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(vroom)
+library(patchwork)
 ```
 
-You can add options to executable code like this
+### Question 1. Data loading : 
 
-```{r}
-#| echo: false
-2 * 2
+```{r, echo=FALSE, message = FALSE}
+battletech <- vroom(here("data", "Btdatasystems.csv"), 
+                    delim = ":", 
+                    quote = "\"", 
+                    na = c("", NA))
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+### Question 2. 
