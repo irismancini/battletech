@@ -207,3 +207,32 @@ count_nasystems <- nrow(na_systems)
 ```
 
 The number of star systems that cannot be found in the System-faction.csv file is `r count_nasystems`\`
+
+### Question 11: 
+
+```{r, echo = FALSE}
+
+#We are going to join the databases such that we can analyse the whole data, and get rid of the data in which we don't have any match 
+
+complete_factions <- the_faction |>
+  inner_join(system_faction, by = "faction_key")
+
+faction_counts <- complete_factions |>
+  group_by(`Faction Name`) |>
+  summarise(NumberOfSystems = n()) |>
+  filter(NumberOfSystems > 0)
+
+ggplot(faction_counts, aes(x = `Faction Name`, y = NumberOfSystems)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "number of star system by faction that control at least one system ",
+       x = "Name of the Faction",
+       y = "Number of star systems controlled") 
+
+```
+
+### Question 12. 
+
+```{r, echo = FALSE, message = FALSE}
+
+```
