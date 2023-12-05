@@ -195,7 +195,7 @@ table_AIU <- system_faction |>
   group_by(faction_key) |>
   summarise(Nombre = n())
 
-kable(table2)
+kable(table_AIU)
 ```
 
 ### Question 10. 
@@ -234,5 +234,18 @@ ggplot(faction_counts, aes(x = `Faction Name`, y = NumberOfSystems)) +
 ### Question 12. 
 
 ```{r, echo = FALSE, message = FALSE}
+
+#We make another join, between our battletech database, and our database that includes bothe the_faction.csv and the system_faction.csv datafiles, excluding the non real factions : 
+join_cf_bf <- complete_factions |>
+  inner_join(battletech, by = "star_code") |>
+  filter(!faction_key %in% c("A", "I", "U"))  
+
+#Graphical representation:
+ggplot(join_cf_bf, aes(x = faction_key, y = `distance from the sun`)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "distance from the sun, depending on the controlling faction",
+       x = "Faction",
+       y = "Distance from the Sun")
 
 ```
