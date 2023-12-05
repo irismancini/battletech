@@ -1,5 +1,5 @@
 ---
-title: "battletech Lab - 5/12/23"
+title: "Battletech Lab - 5/12/23"
 format: html
 editor: visual
 author: "Iris Mancini"
@@ -15,13 +15,46 @@ library(vroom)
 library(patchwork)
 ```
 
-### Question 1. Data loading : 
+### Question 1.
 
-```{r, echo=FALSE, message = FALSE}
+Commits done on github.
+
+### Question 2.
+
+Here is the link to my repository on GitHub : https://github.com/irismancini/battletech.git
+
+### Question 3. Data loading
+
+```{r, echo = FALSE, message = FALSE}
 battletech <- vroom(here("data", "Btdatasystems.csv"), 
-                    delim = ":", 
-                    quote = "\"", 
-                    na = c("", NA))
+                    delim = ":", #the delimitor used in the csv file is the ":"
+                    quote = "\"", #the strings are separated by quotation marks
+                    na = c("", "NA"), 
+                    locale = locale(grouping_mark = ".", decimal_mark = ",", encoding = "UTF-8")) #we replace the missing values by NA
+
 ```
 
-### Question 2. 
+The number of star systems is `r nrow(battletech)`\`desrcibed by `r ncol(battletech)`\`variables.
+
+Checking that all my variables are indeed numerical variables :
+
+```{r, echo = FALSE, message = FALSE}
+
+class(battletech$star_code)
+
+class(battletech$Star_name)
+
+class(battletech$`distance from the sun`)
+
+class(battletech$`Equivalent Temperature`)
+
+class(battletech$`relative mass`)
+
+class(battletech$Radius)
+
+class(battletech$`RELATIVE LUMINOSITY`)
+
+class(battletech$`Stellar Class`)
+```
+
+I realized that not all my numerical variables were considered numeric, since I didn't specify, downloading the date base that my decimal separators were comas and not point, so I added a command such that comas were replaced by points and now all my variables are numerical.
