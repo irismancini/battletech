@@ -279,3 +279,22 @@ join_cf_bf3052 <- complete_factions |>
 active_factions <- join_cf_bf3052 |>
   filter(`When Founded` <= 3052, is.na(`When Ended`) | `When Ended`> 3052)
 ```
+
+### Question 15. 
+
+Commits of the stellar type files.
+
+### Question 16. 
+
+Data loading
+
+```{r, message = FALSE, echo = FALSE}
+
+stellar_types <- vroom(here("data", "star_types.csv"), 
+                    delim = ",", #the delimitor used in the csv file is the ","
+                    quote = "", #the strings are separated by nothing
+                    na = c("", "NA"), 
+                    locale = locale(grouping_mark = ".", decimal_mark = ",", encoding = "UTF-8"))
+
+
+```
