@@ -165,3 +165,24 @@ extreme_lum <- battletech |>
 kable(extreme_lum)
 
 ```
+
+### Question 7. 
+
+Commits of the faction file and system-faction datafiles.
+
+### Question 8. 
+
+```{r, message = FALSE, code = FALSE}
+
+#loading of the system faction datafile: 
+system_faction <- vroom(here("data", "Sytem-faction.csv"), 
+                    delim = ":", #the delimitor used in the csv file is the ":"
+                    quote = "\"", #the strings are separated by quotation marks
+                    na = c("", "NA"))
+
+the_faction <- vroom(here("data", "the_factions.csv"), 
+                    delim = ":", #the delimitor used in the csv file is the ":"
+                    quote = "\"", #the strings are separated by quotation marks
+                    na = c("Unknown", "NA"))
+
+```
