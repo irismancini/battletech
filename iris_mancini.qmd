@@ -249,3 +249,19 @@ ggplot(join_cf_bf, aes(x = faction_key, y = `distance from the sun`)) +
        y = "Distance from the Sun")
 
 ```
+
+### Question 13. 
+
+```{r, echo = FALSE, message = FALSE}
+
+
+
+closest_stars <- join_cf_bf |>
+  group_by(faction_key) |>
+  summarise("Closest Star" = star_code[which.min(`distance from the sun`)], 
+            Distance = min(`distance from the sun`, na.rm = TRUE))
+
+closest_stars |>
+  knitr::kable()
+
+```
