@@ -57,9 +57,11 @@ I realized that not all my numerical variables were considered numeric, since I 
 
 ```{r, message = FALSE, echo = FALSE}
 
-n_obs <- nrow(battletech)
+n_obs <- battletech |> 
+  count(nrow(battletech))
 
-n_var <- ncol(battletech)
+n_var <- battletech |>
+  count(ncol(battletech))
 
 na_values <- summarise_all(battletech, ~sum(is.na(.)))
 
@@ -75,3 +77,22 @@ table <- data.frame(
 
 kable(table, format = "markdown")
 ```
+
+### Question 5 : 
+
+```{r, message = FALSE, echo =FALSE}
+
+# I create a dataframe that cleans my data of NA value for my two specific columns so I dont get a warning message
+
+temp_rad <- na.omit(battletech, cols = c(`Equivalent Temperature`,Radius))
+
+#Graphical representation : 
+ggplot(temp_rad, aes(x = Radius, y = `Equivalent Temperature` )) +
+  geom_point() +  
+  labs(title = "Temperature of Stars as a Function of Their Radius",
+       x = "Radius",
+       y = "Temperature")
+
+```
+
+### Question 6. 
