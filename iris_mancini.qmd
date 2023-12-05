@@ -265,3 +265,17 @@ closest_stars |>
   knitr::kable()
 
 ```
+
+### Question 14: 
+
+```{r, message = FALSE, echo = FALSE}
+
+
+join_cf_bf3052 <- complete_factions |>
+  inner_join(battletech, by = "star_code") |>
+  filter(!faction_key %in% c("A", "I", "U"))
+
+  
+active_factions <- join_cf_bf3052 |>
+  filter(`When Founded` <= 3052, is.na(`When Ended`) | `When Ended`> 3052)
+```
