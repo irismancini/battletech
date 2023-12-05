@@ -184,5 +184,26 @@ the_faction <- vroom(here("data", "the_factions.csv"),
                     delim = ":", #the delimitor used in the csv file is the ":"
                     quote = "\"", #the strings are separated by quotation marks
                     na = c("Unknown", "NA"))
-
 ```
+
+### Question 9 : 
+
+```{r, echo = FALSE}
+
+table_AIU <- system_faction |>
+  filter(faction_key %in% c("A", "I", "U")) |>
+  group_by(faction_key) |>
+  summarise(Nombre = n())
+
+kable(table2)
+```
+
+### Question 10. 
+
+```{r, echo = FALSE}
+
+na_systems <- anti_join(system_faction, the_faction, by = "faction_key")
+count_nasystems <- nrow(na_systems)
+```
+
+The number of star systems that cannot be found in the System-faction.csv file is `r count_nasystems`\`
