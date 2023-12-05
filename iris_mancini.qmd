@@ -7,6 +7,7 @@ author: "Iris Mancini"
 
 ```{r, echo= FALSE, message = FALSE}
 here::i_am("battletech.Rproj")
+library(knitr)
 library(here)
 library(dplyr)
 library(tidyr)
@@ -41,20 +42,36 @@ Checking that all my variables are indeed numerical variables :
 ```{r, echo = FALSE, message = FALSE}
 
 class(battletech$star_code)
-
 class(battletech$Star_name)
-
 class(battletech$`distance from the sun`)
-
 class(battletech$`Equivalent Temperature`)
-
 class(battletech$`relative mass`)
-
 class(battletech$Radius)
-
 class(battletech$`RELATIVE LUMINOSITY`)
-
 class(battletech$`Stellar Class`)
 ```
 
 I realized that not all my numerical variables were considered numeric, since I didn't specify, downloading the date base that my decimal separators were comas and not point, so I added a command such that comas were replaced by points and now all my variables are numerical.
+
+### Question 4. 
+
+```{r, message = FALSE, echo = FALSE}
+
+n_obs <- nrow(battletech)
+
+n_var <- ncol(battletech)
+
+na_values <- summarise_all(battletech, ~sum(is.na(.)))
+
+n_1na <- sum(rowSums(is.na(battletech)) > 0)
+
+table <- data.frame(
+  Metric = c("Number of Observations", "Number of Variables", 
+             "Number of Missing Values per variable", 
+             "Observations with at least one Missing Value"),
+  Value = c(n_obs, n_var, 
+            paste(na_values), collapse = ", "), 
+            n_1na)
+
+kable(table, format = "markdown")
+```
