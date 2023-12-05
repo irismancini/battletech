@@ -96,3 +96,72 @@ ggplot(temp_rad, aes(x = Radius, y = `Equivalent Temperature` )) +
 ```
 
 ### Question 6. 
+
+```{r, message = FALSE, echo = FALSE}
+
+extreme_mass <- battletech |>
+  select(Star_name, `relative mass`) |> 
+  filter(!is.na(`relative mass`)) |>
+  arrange(`relative mass`) |>
+  summarise(
+    Most_Massive_Star = last(Star_name),
+    Most_Massive_Value = last(`relative mass`),
+    Least_Massive_Star = first(Star_name),
+    Least_Massive_Value = first(`relative mass`)
+  )
+
+kable(extreme_mass)
+
+extreme_distance <- battletech |>
+  select(Star_name, `distance from the sun`) |> 
+  filter(!is.na(`distance from the sun`)) |>
+  arrange(`distance from the sun`) |>
+  summarise(
+    Most_distant_Star = last(Star_name),
+    Most_distant_Value = last(`distance from the sun`),
+    Least_distant_Star = first(Star_name),
+    Least_distant_Value = first(`distance from the sun`)
+  )
+
+kable(extreme_distance)
+
+extreme_temp <- battletech |>
+  select(Star_name, `Equivalent Temperature`) |> 
+  filter(!is.na(`Equivalent Temperature`)) |>
+  arrange(`Equivalent Temperature`) |>
+  summarise(
+    Most_distant_Star = last(Star_name),
+    Most_distant_Value = last(`Equivalent Temperature`),
+    Least_distant_Star = first(Star_name),
+    Least_distant_Value = first(`Equivalent Temperature`)
+  )
+
+kable(extreme_temp)
+
+extreme_radius <- battletech |>
+  select(Star_name, `Radius`) |> 
+  filter(!is.na(`Radius`)) |>
+  arrange(`Radius`) |>
+  summarise(
+    Most_distant_Star = last(Star_name),
+    Most_distant_Value = last(`Radius`),
+    Least_distant_Star = first(Star_name),
+    Least_distant_Value = first(`Radius`)
+  )
+
+kable(extreme_radius)
+
+extreme_lum <- battletech |>
+  select(Star_name, `RELATIVE LUMINOSITY`) |> 
+  filter(!is.na(`RELATIVE LUMINOSITY`)) |>
+  arrange(`RELATIVE LUMINOSITY`) |>
+  summarise(
+    Most_distant_Star = last(Star_name),
+    Most_distant_Value = last(`RELATIVE LUMINOSITY`),
+    Least_distant_Star = first(Star_name),
+    Least_distant_Value = first(`RELATIVE LUMINOSITY`)
+  )
+
+kable(extreme_lum)
+
+```
